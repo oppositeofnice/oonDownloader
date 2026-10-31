@@ -252,7 +252,7 @@ class Downloader(ctk.CTk):
 
         self.url_entry = ctk.CTkEntry(
             self.input_frame,
-            placeholder_text="Enter YouTube Link Here",
+            placeholder_text="Enter Video Link Here",
             height=45,
             fg_color="#000000",
             text_color="#ffffff",
