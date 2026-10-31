@@ -1,5 +1,7 @@
 # oonDownloader
 
+![oonDownloader](screenshot.png)
+
 A simple desktop app for downloading video and audio. Built with Python and customtkinter. 
 Using yt-dlp and ffmpeg under the hood, it works with YouTube and all other sites yt-dlp supports.
 
