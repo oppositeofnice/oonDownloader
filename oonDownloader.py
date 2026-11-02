@@ -22,9 +22,6 @@ ctk.set_appearance_mode("dark")
 
 
 def get_ffmpeg_path():
-    # PyInstaller temp
-    if getattr(sys, 'frozen', False):
-        return os.path.join(sys._MEIPASS, "ffmpeg.exe")
     return shutil.which("ffmpeg") or "ffmpeg"
 
 
@@ -32,7 +29,6 @@ YTDLP_URL = "https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp.ex
 
 
 def get_data_dir():
-    #  %APPDATA%\oonDownloader  for data
     base = os.getenv("APPDATA") or os.path.expanduser("~")
     folder = os.path.join(base, "oonDownloader")
     try:
@@ -47,7 +43,6 @@ def get_history_path():
 
 
 def get_managed_ytdlp_path():
-    # self download and update for yt-dlp.exe
     return os.path.join(get_data_dir(), "yt-dlp.exe")
 
 
@@ -216,6 +211,12 @@ class Downloader(ctk.CTk):
             self.iconbitmap(get_icon_path())
         except Exception:
             pass
+
+        if shutil.which("ffmpeg") is None:
+            self.after(500, lambda: messagebox.showwarning(
+                "ffmpeg not found",
+                "ffmpeg is required for mp3 conversion and for merging "
+                "video and audio.\nInstall it and add it to PATH."))
 
         self.resizable(False, False)
         self.configure(fg_color="#000000")
